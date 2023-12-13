@@ -43,7 +43,7 @@
     </target>
 
      <target name="JedisIndex">
-        <java classname="csudh.csc311.asg11.JedisIndex" failonerror="true" fork="yes">
+        <java classname="FinalProject.JedisIndex" failonerror="true" fork="yes">
             <classpath refid="JavaCS.classpath"/>
         </java>
     </target>
@@ -58,21 +58,26 @@
     </target>
 
     <target name="JedisMaker">
-        <java classname="finalproject.JedisMaker" failonerror="true" fork="yes">
+        <java classname="FinalProject.JedisMaker" failonerror="true" fork="yes">
             <classpath refid="JavaCS.classpath"/>
         </java>
     </target>
 
      <target name="WikiSearch">
-        <java classname="finalproject.WikiSearch" failonerror="true" fork="yes">
+        <java classname="FinalProject.WikiSearch" failonerror="true" fork="yes">
             <classpath refid="JavaCS.classpath"/>
         </java>
     </target>
 
-     <target name="Card">
-        <java classname="finalproject.Card" failonerror="true" fork="yes">
+     <target name="WikiFetcher">
+        <java classname="FinalProject.WikiFetcher" failonerror="true" fork="yes">
             <classpath refid="JavaCS.classpath"/>
         </java>
     </target>
 
+     <target name="TermCounter">
+        <java classname="FinalProject.TermCounter" failonerror="true" fork="yes">
+            <classpath refid="JavaCS.classpath"/>
+        </java>
+    </target>
 </project>
