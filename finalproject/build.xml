@@ -43,47 +43,48 @@
     </target>
 
      <target name="JedisIndex">
-        <java classname="FinalProject.JedisIndex" failonerror="true" fork="yes">
+        <java classname="finalproject.JedisIndex" failonerror="true" fork="yes">
             <classpath refid="JavaCS.classpath"/>
         </java>
     </target>
-    
+
     <target name="WikiSearchTest">
         <mkdir dir="${junit.output.dir}"/>
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
-            <test name="finalproject.JedisIndexTest" todir="${junit.output.dir}"/>
+            <test name="finalproject.WikiSearchTest" todir="${junit.output.dir}"/>
             <classpath refid="JavaCS.classpath"/>
         </junit>
     </target>
 
     <target name="JedisMaker">
-        <java classname="FinalProject.JedisMaker" failonerror="true" fork="yes">
-            <classpath refid="JavaCS.classpath"/>
-        </java>
-    </target>
-
-     <target name="WikiSearch">
-        <java classname="FinalProject.WikiSearch" failonerror="true" fork="yes">
-            <classpath refid="JavaCS.classpath"/>
-        </java>
-    </target>
-
-     <target name="WikiFetcher">
-        <java classname="FinalProject.WikiFetcher" failonerror="true" fork="yes">
+        <java classname="finalproject.JedisMaker" failonerror="true" fork="yes">
             <classpath refid="JavaCS.classpath"/>
         </java>
     </target>
 
      <target name="TermCounter">
-        <java classname="FinalProject.TermCounter" failonerror="true" fork="yes">
+        <java classname="finalproject.TermCounter" failonerror="true" fork="yes">
             <classpath refid="JavaCS.classpath"/>
         </java>
     </target>
 
-         <target name="WikiNodeIterable">
-        <java classname="FinalProject.WikiNodeIterable" failonerror="true" fork="yes">
+     <target name="WikiFetcher">
+        <java classname="finalproject.WikiFetcher" failonerror="true" fork="yes">
             <classpath refid="JavaCS.classpath"/>
         </java>
     </target>
+
+     <target name="WikiSearch">
+        <java classname="finalproject.WikiSearch" failonerror="true" fork="yes">
+            <classpath refid="JavaCS.classpath"/>
+        </java>
+    </target>
+
+     <target name="WikiNodeIterable">
+        <java classname="finalproject.WikiNodeIterable" failonerror="true" fork="yes">
+            <classpath refid="JavaCS.classpath"/>
+        </java>
+    </target>
+
 </project>

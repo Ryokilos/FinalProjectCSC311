@@ -35,8 +35,12 @@ public class WikiSearch {
 
 	//Computes the union of two search results
 	public WikiSearch or(WikiSearch that) {
-		//
-		return null;
+		Map<String, Integer> union = new HashMap<String, Integer>(map);
+		for (String term: that.map.keySet()) {
+			int relevance = totalRelevance(this.getRelevance(term), that.getRelevance(term));
+			union.put(term, relevance);
+		}
+		return new WikiSearch(union);
 	}
 
     //Computes intersection of two search results
