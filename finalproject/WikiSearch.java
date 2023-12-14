@@ -45,8 +45,14 @@ public class WikiSearch {
 
     //Computes intersection of two search results
 	public WikiSearch and(WikiSearch that) {
-		//
-		return null;
+		Map<String, Integer> intersection = new HashMap<String, Integer>();
+		for (String term: map.keySet()) {
+			if (that.map.containsKey(term)) {
+				int relevance = totalRelevance(this.map.get(term), that.map.get(term));
+				intersection.put(term, relevance);
+			}
+		}
+		return new WikiSearch(intersection);
 	}
 
 	//Computes intersection of two search results
