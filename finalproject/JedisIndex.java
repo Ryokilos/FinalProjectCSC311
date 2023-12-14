@@ -61,7 +61,7 @@ public class JedisIndex {
 		String redisKey = termCounterKey(url);
 		return jedis.exists(redisKey);
 	}
-	
+
 	/**
 	 * Adds a URL to the set associated with `term`.
 	 * 
@@ -83,7 +83,7 @@ public class JedisIndex {
 		return set;
 	}
 
-    /**
+	/**
 	 * Looks up a term and returns a map from URL to count.
 	 * 
 	 * @param term
@@ -91,15 +91,15 @@ public class JedisIndex {
 	 */
 	public Map<String, Integer> getCounts(String term) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
-    	Set<String> urls = getURLs(term);
-    		for (String url: urls) {
-    			Integer count = getCount(url, term);
-            	map.put(url, count);
-			}
+		Set<String> urls = getURLs(term);
+		for (String url : urls) {
+			Integer count = getCount(url, term);
+			map.put(url, count);
+		}
 		return map;
 	}
 
-    /**
+	/**
 	 * Returns the number of times the given term appears at the given URL.
 	 * 
 	 * @param url
@@ -115,29 +115,29 @@ public class JedisIndex {
 	/**
 	 * Adds a page to the index.
 	 *
-	 * @param url         URL of the page.
-	 * @param paragraphs  Collection of elements that should be indexed.
+	 * @param url        URL of the page.
+	 * @param paragraphs Collection of elements that should be indexed.
 	 */
 	public void indexPage(String url, Elements paragraphs) {
-	    System.out.println("Indexing " + url);
+		System.out.println("Indexing " + url);
 		TermCounter tc = new TermCounter(url);
 		tc.processElements(paragraphs);
 		pushTermCounterToRedis(tc);
 	}
-		public List<Object> pushTermCounterToRedis(TermCounter tc) {
-			Transaction t = jedis.multi();
-			String url = tc.getLabel();
-			String hashname = termCounterKey(url);
-			t.del(hashname);
-				 for (String term: tc.keySet()) {
-					  Integer count = tc.get(term);
-					  t.hset(hashname, term, count.toString());
-					  t.sadd(urlSetKey(term), url);
-			}
-			List<Object> res = t.exec();
-			return res; 
-}
-        
+
+	public List<Object> pushTermCounterToRedis(TermCounter tc) {
+		Transaction t = jedis.multi();
+		String url = tc.getLabel();
+		String hashname = termCounterKey(url);
+		t.del(hashname);
+		for (String term : tc.keySet()) {
+			Integer count = tc.get(term);
+			t.hset(hashname, term, count.toString());
+			t.sadd(urlSetKey(term), url);
+		}
+		List<Object> res = t.exec();
+		return res;
+	}
 
 	/**
 	 * Prints the contents of the index.
@@ -146,17 +146,18 @@ public class JedisIndex {
 	 */
 	public void printIndex() {
 		// loop through the search terms
-		for (String term: termSet()) {
+		for (String term : termSet()) {
 			System.out.println(term);
 
 			// for each term, print the pages where it appears
 			Set<String> urls = getURLs(term);
-			for (String url: urls) {
+			for (String url : urls) {
 				Integer count = getCount(url, term);
 				System.out.println("    " + url + " " + count);
 			}
 		}
 	}
+
 	/**
 	 * Returns the set of terms that have been indexed.
 	 *
@@ -167,7 +168,7 @@ public class JedisIndex {
 	public Set<String> termSet() {
 		Set<String> keys = urlSetKeys();
 		Set<String> terms = new HashSet<String>();
-		for (String key: keys) {
+		for (String key : keys) {
 			String[] array = key.split(":");
 			if (array.length < 2) {
 				terms.add("");
@@ -210,7 +211,7 @@ public class JedisIndex {
 	public void deleteURLSets() {
 		Set<String> keys = urlSetKeys();
 		Transaction t = jedis.multi();
-		for (String key: keys) {
+		for (String key : keys) {
 			t.del(key);
 		}
 		t.exec();
@@ -226,7 +227,7 @@ public class JedisIndex {
 	public void deleteTermCounters() {
 		Set<String> keys = termCounterKeys();
 		Transaction t = jedis.multi();
-		for (String key: keys) {
+		for (String key : keys) {
 			t.del(key);
 		}
 		t.exec();
@@ -242,7 +243,7 @@ public class JedisIndex {
 	public void deleteAllKeys() {
 		Set<String> keys = jedis.keys("*");
 		Transaction t = jedis.multi();
-		for (String key: keys) {
+		for (String key : keys) {
 			t.del(key);
 		}
 		t.exec();
@@ -256,13 +257,13 @@ public class JedisIndex {
 		Jedis jedis = JedisMaker.make();
 		JedisIndex index = new JedisIndex(jedis);
 
-		//index.deleteTermCounters();
-		//index.deleteURLSets();
-		//index.deleteAllKeys();
+		// index.deleteTermCounters();
+		// index.deleteURLSets();
+		// index.deleteAllKeys();
 		loadIndex(index);
 
 		Map<String, Integer> map = index.getCounts("the");
-		for (Entry<String, Integer> entry: map.entrySet()) {
+		for (Entry<String, Integer> entry : map.entrySet()) {
 			System.out.println(entry);
 		}
 	}

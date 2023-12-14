@@ -10,7 +10,6 @@ import java.util.NoSuchElementException;
 
 import org.jsoup.nodes.Node;
 
-
 /**
  * Performs a depth-first traversal of a jsoup Node.
  *
@@ -26,7 +25,7 @@ public class WikiNodeIterable implements Iterable<Node> {
 	 * @param root
 	 */
 	public WikiNodeIterable(Node root) {
-	    this.root = root;
+		this.root = root;
 	}
 
 	@Override
@@ -52,7 +51,7 @@ public class WikiNodeIterable implements Iterable<Node> {
 		 */
 		public WikiNodeIterator(Node node) {
 			stack = new ArrayDeque<Node>();
-		    stack.push(root);
+			stack.push(root);
 		}
 
 		@Override
@@ -69,12 +68,12 @@ public class WikiNodeIterable implements Iterable<Node> {
 
 			// otherwise pop the next Node off the stack
 			Node node = stack.pop();
-			//System.out.println(node);
+			// System.out.println(node);
 
 			// push the children onto the stack in reverse order
 			List<Node> nodes = new ArrayList<Node>(node.childNodes());
 			Collections.reverse(nodes);
-			for (Node child: nodes) {
+			for (Node child : nodes) {
 				stack.push(child);
 			}
 			return node;

@@ -8,7 +8,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-
 public class WikiFetcher {
 	private long lastRequestTime = -1;
 	private long minInterval = 1000;
@@ -43,7 +42,7 @@ public class WikiFetcher {
 			long nextRequestTime = lastRequestTime + minInterval;
 			if (currentTime < nextRequestTime) {
 				try {
-					//System.out.println("Sleeping until " + nextRequestTime);
+					// System.out.println("Sleeping until " + nextRequestTime);
 					Thread.sleep(nextRequestTime - currentTime);
 				} catch (InterruptedException e) {
 					System.err.println("Warning: sleep interrupted in fetchWikipedia.");
@@ -62,7 +61,7 @@ public class WikiFetcher {
 		String url = "https://raw.githubusercontent.com/behollister/fixed-wiki-pages/main/Java_(programming_language)";
 		Elements paragraphs = wf.fetchWikipedia(url);
 
-		for (Element paragraph: paragraphs) {
+		for (Element paragraph : paragraphs) {
 			System.out.println(paragraph);
 		}
 	}
