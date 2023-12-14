@@ -1,5 +1,3 @@
-package finalproject.src;
-
 import java.io.IOException;
 
 import org.jsoup.Connection;
