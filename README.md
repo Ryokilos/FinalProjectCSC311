@@ -1,1 +1,1 @@
-This is designed to search through wikipedia
+WikiSearch object contains a map from URLs to relevance score. Uses “term frequency”, which is number of times search terms appear on page, also called TF-IDF, or “term frequency - inverse document frequency”. 
