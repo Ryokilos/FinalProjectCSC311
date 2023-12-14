@@ -1,4 +1,4 @@
-package finalproject;
+package finalproject.src;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

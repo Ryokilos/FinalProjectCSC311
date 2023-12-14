@@ -1,4 +1,4 @@
-package finalproject;
+package finalproject.src;
 
 import redis.clients.jedis.Jedis;
 

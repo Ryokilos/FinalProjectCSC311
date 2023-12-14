@@ -11,5 +11,8 @@
         "finalproject/lib/jcommon-1.0.23.jar",
         "finalproject/lib/hamcrest-library-1.3.jar",
         "finalproject/lib/hamcrest-core-1.3.jar"
+    ],
+    "java.project.sourcePaths": [
+        "finalproject\\src"
     ]
 }

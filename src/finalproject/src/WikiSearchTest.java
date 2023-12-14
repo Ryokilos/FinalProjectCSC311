@@ -1,4 +1,4 @@
-package finalproject;
+package finalproject.src;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;

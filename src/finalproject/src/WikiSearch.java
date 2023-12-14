@@ -1,4 +1,4 @@
-package finalproject;
+package finalproject.src;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
 import redis.clients.jedis.Jedis;
 
 //Represents the results of a search query
@@ -57,8 +58,11 @@ public class WikiSearch {
 
 	//Computes intersection of two search results
 	public WikiSearch minus(WikiSearch that) {
-		//
-		return null;
+		Map<String, Integer> difference = new HashMap<String, Integer>(map);
+		for (String term: that.map.keySet()) {
+			difference.remove(term);
+		}
+		return new WikiSearch(difference);
 	}
 
     //Computes the relevance of a search with multiple terms
@@ -71,10 +75,17 @@ public class WikiSearch {
 
 	//Sort the results by relevance
 	public List<Entry<String, Integer>> sort() {
-		//
-		return null;
+		List<Entry<String, Integer>> entries = 
+				new LinkedList<Entry<String, Integer>>(map.entrySet());
+			Comparator<Entry<String, Integer>> comparator = new Comparator<Entry<String, Integer>>() {
+            @Override
+            public int compare(Entry<String, Integer> e1, Entry<String, Integer> e2) {
+                return e1.getValue().compareTo(e2.getValue());
+            }
+        };
+		Collections.sort(entries, comparator);
+		return entries;
 	}
-
 
 	//Performs a search and makes a WikiSearch object
 
